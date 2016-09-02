@@ -11,7 +11,7 @@ import java.util.Random;
 
 /**
  *
- * @author Usuario
+ * @author samoliveira
  */
 public class individual {
     private ArrayList<Integer> moves;

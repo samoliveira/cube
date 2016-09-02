@@ -8,7 +8,7 @@ package tpcube;
 
 /**
  *
- * @author Usuario
+ * @author samoliveira
  */
 public class cube {
    private int dim;

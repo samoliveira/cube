@@ -10,7 +10,7 @@ package tpcube;
 import java.util.Scanner;
 /**
  *
- * @author Usuario
+ * @author samoliveira
  */
 public class TpCube {
 
