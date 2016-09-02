@@ -8,7 +8,7 @@ package tpcube;
 
 /**
  *
- * @author Usuario
+ * @author samoliveira
  */
 public class enviroment {
     
