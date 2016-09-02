@@ -15,6 +15,7 @@ import java.util.Random;
  */
 public class individual {
     private ArrayList<Integer> moves;
+    private int fitness;
     
     public void genMoves(int size, int maxMoveSize){
         Random rnd = new Random();
@@ -36,5 +37,17 @@ public class individual {
             moves.set(pos,newMove);
         }
     }
-    
+    public int getFitness(){
+        return fitness;
+    }
+    public void setFitness(cube in){
+        cube candidate = new cube(in.getDim());
+        candidate.setCube(in);
+        
+        
+        for(int i = 0; i < in.getDim(); i++){
+            
+        }
+    }
+           
 }
