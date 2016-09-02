@@ -12,6 +12,7 @@ package tpcube;
  */
 public class cube {
    private int dim;
+   private boolean isDimSet;
    public static final int MAXMOVESIZE3 = 17;
    public static final int MAXMOVESIZE4 = 24;
     
@@ -24,6 +25,7 @@ public class cube {
 
     public cube(int dim) {
         this.dim = dim;
+        isDimSet = true;
         Front  = new int [dim][dim];
         Back = new int [dim][dim]; 
         Left = new int [dim][dim]; 
@@ -31,6 +33,7 @@ public class cube {
         Up = new int [dim][dim];
         Down = new int [dim][dim];
     }
+    
     
     public void rotate(int op){
         int cur;
@@ -266,34 +269,95 @@ public class cube {
     public int getDim() {
         return dim;
     }
-
+    
+    public void setCube(cube cb){
+        cb.setDim(cb.getDim());
+        cb.setFront(cb.getFront());
+        cb.setLeft(cb.getLeft());
+        cb.setRight(cb.getRight());
+        cb.setBack(cb.getBack());
+        cb.setUp(cb.getUp());
+        cb.setDown(cb.getDown());
+    }
     public void setDim(int dim) {
         this.dim = dim;
+        isDimSet = true;
     }
     
     public void setFront(int[][] Front) {
+        if(isDimSet){
+            this.Front = new int [dim][dim];
+        }
         this.Front = Front;
     }
 
     public void setBack(int[][] Back) {
-        this.Back = Back;
+        if(isDimSet){
+            this.Back = new int [dim][dim];      
+        }
+            this.Back = Back;
     }
 
     public void setLeft(int[][] Left) {
+        if(isDimSet){
+            this.Left = new int [dim][dim];
+        }
         this.Left = Left;
+        
+            
     }
 
     public void setRight(int[][] Right) {
+        if(isDimSet){
+            this.Right = new int [dim][dim];
+        }
         this.Right = Right;
     }
 
     public void setUp(int[][] Up) {
+        if(isDimSet){
+            this.Up = new int [dim][dim];
+        }
         this.Up = Up;
     }
 
     public void setDown(int[][] Down) {
-        this.Down = Down;
+        if(isDimSet){
+            this.Down = new int [dim][dim];
+        }
+        this.Down = Down;    
     }
+
+    public int[][] getFront() {
+        return Front;
+    }
+
+    public int[][] getBack() {
+        return Back;
+    }
+
+    public int[][] getLeft() {
+        return Left;
+    }
+
+    public int[][] getRight() {
+        return Right;
+    }
+
+    public int[][] getUp() {
+        return Up;
+    }
+
+    public int[][] getDown() {
+        return Down;
+    }
+
+    public boolean isIsDimSet() {
+        return isDimSet;
+    }
+    
+    
+    
     
     public void print(){
         System.out.println("\n\n........Printing Cube.....\n");
