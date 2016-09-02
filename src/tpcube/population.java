@@ -22,13 +22,21 @@ public class population {
         
         group = new ArrayList<>(size);
         Random rnd = new Random(); 
+        
+        /* gera uma nova população de (size)individuos e com numero de movimentos 
+        variando de 20 a maxsize movimentos
+        */
         for(int i = 0; i < size; i++){
             group.add(new individual());
-            group.get(i).genMoves(rnd.nextInt(maxsize), cube.getMaxMovesSize(dim));
+            group.get(i).genMoves(20+rnd.nextInt(maxsize-20), cube.getMaxMovesSize(dim));
         }
     }
-    public void crossover(){
+    public void crossover(int prob){//[0-100]
+        Random rnd = new Random();
         
+        if(prob > rnd.nextInt(100)){
+            
+        }
     }
     
     
