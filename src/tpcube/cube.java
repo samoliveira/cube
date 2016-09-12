@@ -73,7 +73,7 @@ public class cube {
                     Front[0][i] = Left[0][i];
                     Left[0][i] = Back[0][(dim-1)-i];
                     Back[0][(dim-1)-i] = Right[0][i];
-                    Right[i][0] = cur;
+                    Right[0][i] = cur;
                 }
                 break;
             //D
@@ -83,7 +83,7 @@ public class cube {
                     Front[(dim-1)][i] = Left[(dim-1)][i];
                     Left[(dim-1)][i] = Back[(dim-1)][(dim-1)-i];
                     Back[(dim-1)][(dim-1)-i] = Right[(dim-1)][i];
-                    Right[i][(dim-1)] = cur;
+                    Right[(dim-1)][i] = cur;
                 }
                 break;
             // L
@@ -105,6 +105,7 @@ public class cube {
                     Up[(dim-1)-i][(dim-1)] = Front[i][(dim-1)];
                     Front[i][(dim-1)] = cur;
                 }
+                break;
             // F2
             case 6:
                 for(int i = 0; i < dim; i++){
@@ -135,7 +136,7 @@ public class cube {
                     Back[0][(dim-1)-i] = cur;
                     cur = Left[0][i];
                     Left[0][i] = Right[0][i];
-                    Right[i][0] = cur;
+                    Right[0][i] = cur;
                 }
                 break;            
             //D2
@@ -146,7 +147,7 @@ public class cube {
                     Back[(dim-1)][(dim-1)-i] = cur;
                     cur = Left[(dim-1)][i];
                     Left[(dim-1)][i] = Right[(dim-1)][i];
-                    Right[i][(dim-1)] = cur;
+                    Right[(dim-1)][i] = cur;
                 }
                 break;            
             // L2
@@ -194,8 +195,8 @@ public class cube {
             // Ui
             case 14:
                 for(int i = 0; i < dim; i++){
-                    cur = Right[i][0];
-                    Right[i][0] = Back[0][(dim-1)-i];
+                    cur = Right[0][i];
+                    Right[0][i] = Back[0][(dim-1)-i];
                     Back[0][(dim-1)-i] = Left[0][i];
                     Left[0][i] = Front[0][i];
                     Front[0][i] = cur;
@@ -204,8 +205,8 @@ public class cube {
             // Di
             case 15:
                 for(int i = 0; i < dim; i++){
-                    cur = Right[i][(dim-1)];
-                    Right[i][(dim-1)] = Back[(dim-1)][(dim-1)-i];
+                    cur = Right[(dim-1)][i];
+                    Right[(dim-1)][i] = Back[(dim-1)][(dim-1)-i];
                     Back[(dim-1)][(dim-1)-i] = Left[(dim-1)][i];
                     Left[(dim-1)][i] = Front[(dim-1)][i];
                     Front[(dim-1)][i] = cur;
@@ -220,6 +221,7 @@ public class cube {
                     Back[(dim-1)-i][0] = Down[i][0];
                     Down[i][0] = cur;                    
                 }
+                break;
             // Ri
             case 17:
                 for(int i = 0; i < dim; i++){
@@ -270,8 +272,8 @@ public class cube {
             // Erro
             */        
             default:
-                System.out.println("..."); 
-               //System.out.println("Erro ao executar METODO: cube.rotate __op: " + op);
+                System.out.println("............................................"); 
+               System.out.println("Erro ao executar METODO: cube.rotate __op: " + op);
                 
                break;
                 
