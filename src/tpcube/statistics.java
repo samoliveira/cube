@@ -41,7 +41,7 @@ public class statistics
             temp += (a-mean)*(a-mean);
         return temp/size;
     }
-
+    
     double getStdDev()
     {
         return Math.sqrt(getVariance());
@@ -60,7 +60,9 @@ public class statistics
           return data[data.length / 2];
        }
     }
-    
+    public individual getBest(){
+        return best;
+    }
     
     
 }
