@@ -16,7 +16,7 @@ import java.util.Random;
 public class individual extends Thread{
     private ArrayList<Integer> moves;
     private int fitness;
-    private cube in;
+    public cube in;
     
     public final static int FINALFITNESS = 54;
 
@@ -52,12 +52,14 @@ public class individual extends Thread{
         //size = size - size%4;
         int i = 0;
         if(!(maxSize%2 == 0)){
-            maxSize++;
+            maxSize += 2 - maxSize%2;
         }
             
         while(i < maxSize){
             
-            move = rnd.nextInt(maxMoveNumber+1);
+            move = rnd.nextInt(6);
+            //move = 5;
+            
             if(move > maxMoveNumber)    
                 System.out.println("MAXSIZE: "+maxSize+" i: "+i+" MOVE: "+ move);
             //System.out.println("OIOIOIOIOIOI");
@@ -70,15 +72,15 @@ public class individual extends Thread{
                             moves.add(move);
                             moves.add(move+12);
                         }
-                        if(move >= 12 && move <= maxMoveNumber){
+                       if(move >= 12 && move <= maxMoveNumber){
                             moves.add(move);
                             moves.add(move-12);
                         }
                         // dobra movimentos duplos, pois nao tem versão inversa
-                        if(move >=6 && move <= 11){
+                       if(move >=6 && move <= 11){
                             moves.add(move);
                             moves.add(move);
-                        }
+                       }
                         i+=2;
                     }
                     break;        
@@ -98,7 +100,7 @@ public class individual extends Thread{
         //System.out.println("MAXSIZE: "+ maxSize+" __i :"+ i);
     }
     
-    public void mutate(int maxMoveSize, cube in){
+    public void mutate(int maxMoveSize){
         // Efetua mutação de um gene randomico de posição randomica
         Random rnd = new Random();
         
@@ -108,7 +110,7 @@ public class individual extends Thread{
             newMove = rnd.nextInt(maxMoveSize);
         }
         moves.set(pos,newMove);
-        setFitness();
+        
     }
     public int getFitness(){
         return fitness;
@@ -117,7 +119,7 @@ public class individual extends Thread{
     
     public void setFitness(){
         cube candidate = new cube(in.getDim());
-        candidate.setCube(in);
+        candidate.setMatrix(in.getCubeMatrix(), in.getDim());
         
         // rotaciona o cubo até chegar na configuração final
         
@@ -135,18 +137,105 @@ public class individual extends Thread{
         */
         int qtd = 0;
         char color;
-        char cbMatrix[][][] = new char [6][candidate.getDim()][candidate.getDim()];
-        cbMatrix = candidate.getCubeMatrix();
+        
+        
         for(int x = 0; x < 6; x++){ 
-            color = cbMatrix[x][1][1];
+            color = candidate.getCubeMatrix()[x][1][1];
             for(int i = 0; i < candidate.getDim(); i++){
                 for(int j = 0; j < candidate.getDim(); j++){
-                    if(color == cbMatrix[x][i][j])
+                    if(color == candidate.getCubeMatrix()[x][i][j])
                         qtd++;
                 }
             }
         }
         fitness = qtd;
+    }
+    
+    @Override
+    public String toString(){
+        String str = "";
+        for(int mov: moves){
+            switch(mov){
+            // F
+            case 0:
+                str+="F";
+                break;
+            //B
+            case 1:
+                str+="B";
+                break;
+            //U  
+            case 2:
+                str+="U";
+                break;
+            //D
+            case 3:
+                str+="D";
+                break;
+            // L
+            case 4:
+                str+="L";
+                break;
+            // R
+            case 5:   
+                str+="R";
+                break;
+            // F2
+            case 6:
+                str+="F2";
+                break;
+            // B2
+            case 7:
+                str+="B2";
+                break;            
+            //U2
+            case 8:
+                str+="U2";
+                break;            
+            //D2
+            case 9:
+                str+="D2";
+                break;            
+            // L2
+            case 10:
+                str+="L2";
+                break;            
+            // R2
+            case 11:   
+                str+="R2";
+                break;            
+            // Fi
+            case 12:
+                str+="Fi";
+                break;            
+            // Bi
+            case 13:
+                str+="Bi";
+                break;            
+            // Ui
+            case 14:
+                str+="Ui";
+                break;            
+            // Di
+            case 15:
+                str+="Di";
+                break;            
+            // Li
+            case 16:
+                str+="Li";
+                break;
+            // Ri
+            case 17:
+                str+="Ri";
+                break;
+            default:
+                str+="MOV: "+mov; 
+                break;    
+            }
+            
+            str+= " ";
+        }
+        return str;
     }
     
     public static int FINALFITNESS(){
@@ -155,6 +244,7 @@ public class individual extends Thread{
 
     @Override
     public void run() {
+       System.out.println("@@@"); 
        setFitness();
     }
 }
