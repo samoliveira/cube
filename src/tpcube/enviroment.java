@@ -30,13 +30,23 @@ public class enviroment {
     
     public int evolve(){
         population p = new population(size, maxMoveSize, dim, in);
+        
         statistics st;
         int i = 0;
+        p.setGroupFitness();
+        st = new statistics(p.getGroupFitness(), p.getBest());
+        System.out.println("STD DEV:"+st.getStdDev());
+        for(double ft:p.getGroupFitness()){
+            
+            System.out.println("Fitness: " +ft);
+            
+        }
         for(i = 0; i < epochs; i++){
             if(!p.setGroupFitness()){
+               
                 p.select(k, probCross, probMut, maxMoveSize, in, elitismSize);
                 st = new statistics(p.getGroupFitness(), p.getBest());
-                System.out.println("BEST:"+ p.getBest().getFitness());
+                System.out.println("--BEST:"+ p.getBest().getFitness());
             }
             else{
                 System.out.println("IIIIIIII:"+i);
