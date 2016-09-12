@@ -13,30 +13,38 @@ package tpcube;
 public class cube {
    private int dim;
    private boolean isDimSet;
+   
    public static final int MAXMOVESIZE3 = 17;
    public static final int MAXMOVESIZE4 = 24;
-    
-   private int [][] Front; 
-   private int [][] Back; 
-   private int [][] Left; 
-   private int [][] Right;
-   private int [][] Up; 
-   private int [][] Down;
+  
+   public static char white = 'W';
+   public static char orange = 'O';
+   public static char red = 'R';
+   public static char green = 'G';
+   public static char blue = 'B';
+   public static char yellow = 'Y'; 
+           
+   private char [][] Front; 
+   private char [][] Back; 
+   private char [][] Left; 
+   private char [][] Right;
+   private char [][] Up; 
+   private char [][] Down;
 
     public cube(int dim) {
         this.dim = dim;
         isDimSet = true;
-        Front  = new int [dim][dim];
-        Back = new int [dim][dim]; 
-        Left = new int [dim][dim]; 
-        Right = new int [dim][dim];
-        Up = new int [dim][dim];
-        Down = new int [dim][dim];
+        Front  = new char [dim][dim];
+        Back = new char [dim][dim]; 
+        Left = new char [dim][dim]; 
+        Right = new char [dim][dim];
+        Up = new char [dim][dim];
+        Down = new char [dim][dim];
     }
     
     
     public void rotate(int op){
-        int cur;
+        char cur;
          switch(op){
             // F
             case 0:
@@ -222,7 +230,8 @@ public class cube {
                     Down[i][(dim-1)] = cur;                    
                 }
                 break;            
-            
+
+            /*
             // --- Movimentos exclusivos para cubo 4x4x4 e 5x5x5
             //f    
             case 18:
@@ -259,96 +268,126 @@ public class cube {
             case 25:
                 
             // Erro
+            */        
             default:
-                System.out.println("Erro ao executar METODO: cube.rotate");
+                System.out.println("..."); 
+               //System.out.println("Erro ao executar METODO: cube.rotate __op: " + op);
                 
+               break;
                 
         }  
     }
-   
+    
     public int getDim() {
         return dim;
     }
+    public void setMatrix(char[][][] matrix, int dim){
+        this.dim = dim;
+        Front = matrix[0];
+        Left = matrix[1] ;
+       Right = matrix[2];
+       Back = matrix[3];
+       Up = matrix[4] ;
+      Down =  matrix[5];
+    }
     
-    public void setCube(cube cb){
-        cb.setDim(cb.getDim());
-        cb.setFront(cb.getFront());
-        cb.setLeft(cb.getLeft());
-        cb.setRight(cb.getRight());
-        cb.setBack(cb.getBack());
-        cb.setUp(cb.getUp());
-        cb.setDown(cb.getDown());
+    
+    
+    public char [][][] getCubeMatrix(){
+        char matrix[][][] =  new char[6][dim][dim];
+        matrix[0] = Front.clone();
+        matrix[1] = Left.clone();
+        matrix[2] = Right.clone();
+        matrix[3] = Back.clone();
+        matrix[4] = Up.clone();
+        matrix[5] = Down.clone();
+        return matrix;
+    }
+    
+    public void setCube(cube cb){ 
+        setDim(cb.getDim());
+        setFront(cb.getFront());
+        setLeft(cb.getLeft());
+        setRight(cb.getRight());
+        setBack(cb.getBack());
+        setUp(cb.getUp());
+        setDown(cb.getDown());
     }
     public void setDim(int dim) {
         this.dim = dim;
         isDimSet = true;
     }
     
-    public void setFront(int[][] Front) {
-        if(isDimSet){
-            this.Front = new int [dim][dim];
-        }
-        this.Front = Front;
+    public void setFront(char[][] Front) {     
+        for(int i = 0; i < dim; i++){
+            for(int j = 0; j < dim; j++){
+                this.Front[i][j] = Front[i][j];
+            }
+        }  
+     
     }
 
-    public void setBack(int[][] Back) {
-        if(isDimSet){
-            this.Back = new int [dim][dim];      
+    public void setBack(char[][] Back) {
+        for(int i = 0; i < dim; i++){
+           for(int j = 0; j < dim; j++){
+               this.Back[i][j] = Back[i][j];
+           }
         }
-            this.Back = Back;
     }
 
-    public void setLeft(int[][] Left) {
-        if(isDimSet){
-            this.Left = new int [dim][dim];
-        }
-        this.Left = Left;
-        
-            
+    public void setLeft(char[][] Left) {
+        for(int i = 0; i < dim; i++){
+            for(int j = 0; j < dim; j++){
+                this.Left[i][j] = Left[i][j];
+            }
+        }         
     }
 
-    public void setRight(int[][] Right) {
-        if(isDimSet){
-            this.Right = new int [dim][dim];
+    public void setRight(char[][] Right) {
+        for(int i = 0; i < dim; i++){
+            for(int j = 0; j < dim; j++){
+                this.Right[i][j] = Right[i][j];
+            }
         }
-        this.Right = Right;
     }
 
-    public void setUp(int[][] Up) {
-        if(isDimSet){
-            this.Up = new int [dim][dim];
+    public void setUp(char[][] Up) {
+        for(int i = 0; i < dim; i++){
+            for(int j = 0; j < dim; j++){
+                this.Up[i][j] = Up[i][j];
+            }
         }
-        this.Up = Up;
     }
 
-    public void setDown(int[][] Down) {
-        if(isDimSet){
-            this.Down = new int [dim][dim];
-        }
-        this.Down = Down;    
+    public void setDown(char[][] Down) {
+        for(int i = 0; i < dim; i++){
+           for(int j = 0; j < dim; j++){
+               this.Down[i][j] = Down[i][j];
+           }
+        }    
     }
 
-    public int[][] getFront() {
+    public char[][] getFront() {
         return Front;
     }
 
-    public int[][] getBack() {
+    public char[][] getBack() {
         return Back;
     }
 
-    public int[][] getLeft() {
+    public char[][] getLeft() {
         return Left;
     }
 
-    public int[][] getRight() {
+    public char[][] getRight() {
         return Right;
     }
 
-    public int[][] getUp() {
+    public char[][] getUp() {
         return Up;
     }
 
-    public int[][] getDown() {
+    public char[][] getDown() {
         return Down;
     }
 
@@ -357,10 +396,17 @@ public class cube {
     }
     
     
+
+    @Override
+    public int hashCode() {
+        return super.hashCode(); //To change body of generated methods, choose Tools | Templates.
+    }
     
     
     public void print(){
-        System.out.println("\n\n........Printing Cube.....\n");
+        
+        System.out.println("\n........Printing Cube: ["+toString()+"].....\n");
+        System.out.println("---HASH---: "+hashCode());
         System.out.println("Front");
         for(int i = 0; i < dim; i++){
             for (int j = 0; j < dim; j++){
@@ -412,6 +458,7 @@ public class cube {
         else
             return -1;
     }
- 
+
+  
    
 }
